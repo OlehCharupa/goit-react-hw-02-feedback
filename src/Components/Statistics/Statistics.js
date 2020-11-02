@@ -1,5 +1,6 @@
 import React from 'react';
 import { StaticticBtn, StaticticList } from './Statistics.styled'
+import PropTypes from "prop-types"
 
 const Statistics = ({ good, neutral, bad, setValue }) => {
     let total = good + neutral + bad
@@ -13,30 +14,24 @@ const Statistics = ({ good, neutral, bad, setValue }) => {
 
             <h2>Statistics</h2>
 
-            {good > 0 ? <StaticticList>
+            {total ? <StaticticList>
                 <li>Good: {good}</li>
                 <li>Neutral: {neutral}</li>
                 <li>Bad: {bad}</li>
                 <li>Total: {total}</li>
                 <li>Positive feedback: {positiveFeedback ? positiveFeedback : "0"}%</li>
-            </StaticticList> : <p>No feedback given</p>
-                && neutral > 0 ? <StaticticList>
-                        <li>Good: {good}</li>
-                        <li>Neutral: {neutral}</li>
-                        <li>Bad: {bad}</li>
-                        <li>Total: {total}</li>
-                        <li>Positive feedback: {positiveFeedback ? positiveFeedback : "0"}%</li>
-                    </StaticticList> : <p>No feedback given</p>
-                        && bad > 0 ? <StaticticList>
-                            <li>Good: {good}</li>
-                            <li>Neutral: {neutral}</li>
-                            <li>Bad: {bad}</li>
-                            <li>Total: {total}</li>
-                            <li>Positive feedback: {positiveFeedback ? positiveFeedback : "0"}%</li>
-                        </StaticticList> : <p>No feedback given</p>}
-
+            </StaticticList>
+                : <p>No feedback given</p>
+            }
         </section>
     );
 };
 
 export default Statistics;
+
+Statistics.propTypes = {
+    good: PropTypes.number,
+    neutral: PropTypes.number,
+    bad: PropTypes.number,
+    setValue: PropTypes.func
+}
